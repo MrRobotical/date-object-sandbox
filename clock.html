@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+      }
+
+      .clock {
+        display: flex;
+      }
+
+      .amPm {
+        margin-left: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="hours"></div>
+      <span>:</span>
+      <div class="minutes"></div>
+      <span>:</span>
+      <div class="seconds"></div>
+      <div class="amPm"></div>
+    </div>
+    <script>
+      // Elements
+      const hoursEl = document.querySelector('.hours');
+      const minutesEl = document.querySelector('.minutes');
+      const secondsEl = document.querySelector('.seconds');
+      const amPmEl = document.querySelector('.amPm');
+
+      function updateClock() {
+        const now = new Date();
+
+        let hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const isAM = hours < 12;
+
+        // Convert from 24-hour time to 12-hour time
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Convert '0' to '12'
+
+        const amPm = isAM ? 'AM' : 'PM';
+
+        // Format time components
+        hoursEl.innerText = hours;
+        minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+        secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+        amPmEl.innerText = amPm;
+      }
+
+      // Initial call to display the time immediately
+      updateClock();
+
+      // Update the clock every second
+      setInterval(updateClock, 1000);
+    </script>
+  </body>
+</html>
